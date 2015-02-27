@@ -1,3 +1,5 @@
+// Rafael S. Guimaraes
+// rafaelg@ifes.edu.br
 #include <stdio.h>
 #include <stdlib.h>
 
