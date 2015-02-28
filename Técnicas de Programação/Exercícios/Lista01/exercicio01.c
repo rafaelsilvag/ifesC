@@ -29,5 +29,4 @@ int main(){
     // Imprime o valor do resultado
     printf("Resultado: %i\n", resultado);
 
-    system("pause");
 }
