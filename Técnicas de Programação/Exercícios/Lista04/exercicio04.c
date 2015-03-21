@@ -28,12 +28,32 @@ void imprimirMedia(int v[MAX]){
 	printf("Media de numeros pares: %.1f\n",mediaPares);
 	printf("Media de numeros impares: %.1f\n",mediaImpares);
 }
-
+void maiorParMenorImpar(int v[MAX]){
+	int maiorPar=-9999, menorImpar=9999;
+	int i;
+	for(i=0;i < MAX;i++){
+		if((v[i] % 2)==0){
+			// O numero eh par
+			if(v[i] > maiorPar){
+				//v[i] eh maior que maiorPar
+				maiorPar = v[i];
+			}
+		}else{
+			// O numero eh impar
+			if(v[i] < menorImpar){
+				//v[i] eh menor que menorImpar
+				menorImpar = v[i];
+			}
+		}
+	}
+	printf("O maior numero par eh: %i\n",maiorPar);
+	printf("O menor numero impar eh: %i\n", menorImpar);
+}
 int main(){
 	//declaracao das variaveis
 	int vParesImpares[MAX];
 
 	lerValores(vParesImpares);
 	imprimirMedia(vParesImpares);
-
+	maiorParMenorImpar(vParesImpares);
 }
