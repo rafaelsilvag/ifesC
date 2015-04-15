@@ -9,7 +9,7 @@ int main(){
 	scanf("%i", &n1);
 	printf("Informe o 2o valor: ");
 	scanf("%i", &n2);
-	
+
 	lerDados(n1, n2, &res);
 	printf("Valor de RES: %i\n", res);
 }
