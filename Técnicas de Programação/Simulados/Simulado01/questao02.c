@@ -5,7 +5,7 @@
  *
  *    Description:  Criar uma funcao que receba como parametro o ano e retorne 1 se for
  *    				um ano bissexto e 0 se nao for um ano bissexto.
- *    				
+ *
  * 					- Um ano e bissexto se for divisivel por 400.
  *    				- Um ano tambem e bissexto se for divisivel por 4, mas nao por 100.
  *

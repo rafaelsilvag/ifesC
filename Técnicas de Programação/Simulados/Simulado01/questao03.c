@@ -18,7 +18,7 @@
  * =====================================================================================
  */
 #include <stdlib.h>
-#include<stdio.h>
+#include <stdio.h>
 
 int main(){
 	char frase[51];
