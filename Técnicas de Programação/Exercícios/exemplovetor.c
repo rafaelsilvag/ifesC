@@ -6,6 +6,7 @@ int main(){
 	float notas[5];
 	float soma = 0;
 	int i;
+
 	//Ler as notas
 	for(i=0;i<5;i++){
 		printf("Informe o valor da nota: ");
