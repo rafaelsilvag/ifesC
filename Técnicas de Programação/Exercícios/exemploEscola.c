@@ -62,7 +62,7 @@ void cadastrarProfessores(Professor *v, int qtd){
         scanf("%i",&v[i].idade);
     }
 }
-void exibirProfessores(Professor *v, qtd){
+void exibirProfessores(Professor *v, int qtd){
     int i;
     for(i=0;i<qtd;i++){
         printf("ID_PROFESSOR: %i\n", v[i].id_professor);
@@ -83,12 +83,12 @@ void cadastrarCursos(Curso *v, int qtd){
         gets(v[i].descricao);
     }
 }
-void exibirCursos(Curso *v, qtd){
+void exibirCursos(Curso *v, int qtd){
     int i;
     for(i=0;i<qtd;i++){
         printf("ID_CURSO: %i\n", v[i].id_curso);
         printf("NOME: %s\n", v[i].nome);
-        printf("DESCRICAO: %i\n", v[i].descricao);
+        printf("DESCRICAO: %s\n", v[i].descricao);
     }
 }
 void cadastrarDisciplinas(Disciplina *v, int qtd){
@@ -104,12 +104,12 @@ void cadastrarDisciplinas(Disciplina *v, int qtd){
         gets(v[i].ementa);
     }
 }
-void exibirDisciplinas(Disciplina *v, qtd){
+void exibirDisciplinas(Disciplina *v, int qtd){
     int i;
     for(i=0;i<qtd;i++){
         printf("ID_DISCIPLINA: %i\n", v[i].id_disciplina);
         printf("NOME: %s\n", v[i].nome);
-        printf("EMENTA: %i\n", v[i].ementa);
+        printf("EMENTA: %s\n", v[i].ementa);
     }
 }
 int main(){
@@ -118,7 +118,7 @@ int main(){
     Disciplina *v_disciplinas;
     Curso *v_cursos;
     int qtd_alunos, qtd_professores, qtd_disciplinas, qtd_cursos;
-    int opc;
+    int opc,i,j;
 
     while(1){
         system("cls");
@@ -149,19 +149,19 @@ int main(){
 				break;
             case 2:
                 printf("Informe a qtd de professores: ");
-                scanf("%i",qtd_professores);
+                scanf("%i",&qtd_professores);
                 v_professores = (Professor *)malloc(qtd_professores * sizeof(Professor));
                 cadastrarProfessores(v_professores, qtd_professores);
                 break;
             case 3:
                 printf("Informe a qtd de cursos: ");
-                scanf("%i",qtd_cursos);
+                scanf("%i",&qtd_cursos);
                 v_cursos = (Curso *)malloc(qtd_cursos * sizeof(Curso));
                 cadastarCursos(v_cursos, qtd_cursos);
                 break;
             case 4:
                 printf("Informe a qtd de disciplinas: ");
-                scanf("%i",qtd_disciplinas);
+                scanf("%i",&qtd_disciplinas);
                 v_disciplinas = (Disciplina *)malloc(qtd_disciplinas * sizeof(Disciplina));
                 cadastrarDisciplinas(v_disciplinas, qtd_disciplinas);
                 break;
@@ -178,8 +178,35 @@ int main(){
                 exibirDisciplinas(v_disciplinas, qtd_disciplinas);
                 break;
             case 9:
+                int id;
+                printf("Informe o ID do curso: ");
+                scanf("%i",&id);
+                //Identificar o curso a ser cadastrado as disciplinas
+                for(i=0;i<qtd_cursos;i++){
+                    if(v_cursos[i].id_curso == id){
+                        for(j=0;j<qtd_disciplinas;j++){
+                            v_cursos[i].id_disciplinas[j] = v_disciplinas[j].id_disciplina;
+                        }
+                        printf("Disciplinas inseridas no curso...\n");
+                        break;
+                    }
+                }
+                system("pause");
                 break;
             case 10:
+                int id;
+                printf("Informe o ID do curso: ");
+                scanf("%i",&id);
+                for(i=0;i<qtd_cursos;i++){
+                    if(v_cursos[i].id_curso == id){
+                        for(j=0;j<qtd_alunos;j++){
+                            v_cursos[i].id_alunos[j] = v_alunos[j].id_aluno;
+                        }
+                        printf("Alunos inseridos no curso...\n");
+                        break;
+                    }
+                }
+                system("pause");
                 break;
             case 0:
                 exit(0);
