@@ -48,6 +48,7 @@ void exibirAlunos(Aluno *v, int qtd){
         printf("NOME: %s\n", v[i].nome);
         printf("IDADE: %i\n", v[i].idade);
     }
+    system("pause");
 }
 void cadastrarProfessores(Professor *v, int qtd){
     int i;
@@ -69,6 +70,7 @@ void exibirProfessores(Professor *v, int qtd){
         printf("NOME: %s\n", v[i].nome);
         printf("IDADE: %i\n", v[i].idade);
     }
+    system("pause");
 }
 void cadastrarCursos(Curso *v, int qtd){
     int i;
@@ -84,12 +86,23 @@ void cadastrarCursos(Curso *v, int qtd){
     }
 }
 void exibirCursos(Curso *v, int qtd){
-    int i;
+    int i,j;
     for(i=0;i<qtd;i++){
         printf("ID_CURSO: %i\n", v[i].id_curso);
         printf("NOME: %s\n", v[i].nome);
         printf("DESCRICAO: %s\n", v[i].descricao);
+        printf("DISCIPLINAS: ");
+        for(j=0;j<20;j++){
+            printf("%i ",v[i].id_disciplinas[j]);
+        }
+        printf("\n");
+        printf("ALUNOS: ");
+        for(j=0;j<30;j++){
+            printf("%i ",v[i].id_alunos[j]);
+        }
+        printf("\n");
     }
+    system("pause");
 }
 void cadastrarDisciplinas(Disciplina *v, int qtd){
     int i;
@@ -111,6 +124,7 @@ void exibirDisciplinas(Disciplina *v, int qtd){
         printf("NOME: %s\n", v[i].nome);
         printf("EMENTA: %s\n", v[i].ementa);
     }
+    system("pause");
 }
 int main(){
     Aluno *v_alunos;
