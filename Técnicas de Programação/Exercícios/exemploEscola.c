@@ -43,11 +43,73 @@ void cadastrarAlunos(Aluno *v, int qtd){
 }
 void exibirAlunos(Aluno *v, int qtd){
     int i;
-    printf("Quantidade de alunos: %i\n",qtd);
     for(i=0;i<qtd;i++){
         printf("ID_ALUNO: %i\n", v[i].id_aluno);
         printf("NOME: %s\n", v[i].nome);
         printf("IDADE: %i\n", v[i].idade);
+    }
+}
+void cadastrarProfessores(Professor *v, int qtd){
+    int i;
+
+    for(i=0;i<qtd;i++){
+        printf("Informe o ID do professor: ");
+        scanf("%i",&v[i].id_aluno);
+        getchar();
+        printf("Informe o nome do professor: ");
+        gets(v[i].nome);
+        printf("Informe a idade do professor: ");
+        scanf("%i",&v[i].idade);
+    }
+}
+void exibirProfessores(Professor *v, qtd){
+    int i;
+    for(i=0;i<qtd;i++){
+        printf("ID_PROFESSOR: %i\n", v[i].id_professor);
+        printf("NOME: %s\n", v[i].nome);
+        printf("IDADE: %i\n", v[i].idade);
+    }
+}
+void cadastrarCursos(Curso *v, int qtd){
+    int i;
+
+    for(i=0;i<qtd;i++){
+        printf("Informe o ID do curso: ");
+        scanf("%i",&v[i].id_curso);
+        getchar();
+        printf("Informe o nome do professor: ");
+        gets(v[i].nome);
+        printf("Informe a descricao do professor: ");
+        gets(v[i].descricao);
+    }
+}
+void exibirCursos(Curso *v, qtd){
+    int i;
+    for(i=0;i<qtd;i++){
+        printf("ID_CURSO: %i\n", v[i].id_curso);
+        printf("NOME: %s\n", v[i].nome);
+        printf("DESCRICAO: %i\n", v[i].descricao);
+    }
+}
+void cadastrarDisciplinas(Disciplina *v, int qtd){
+    int i;
+
+    for(i=0;i<qtd;i++){
+        printf("Informe o ID da disciplina: ");
+        scanf("%i",&v[i].id_disciplina);
+        getchar();
+        printf("Informe o nome da disciplina: ");
+        gets(v[i].nome);
+        printf("Informe a ementa da disciplina: ");
+        gets(v[i].ementa);
+    }
+}
+void exibirDisciplinas(Disciplina *v, qtd){
+    int i;
+    for(i=0;i<qtd;i++){
+        printf("ID_DISCIPLINA: %i\n", v[i].id_disciplina);
+        printf("NOME: %s\n", v[i].nome);
+        printf("EMENTA: %i\n", v[i].ementa);
     }
 }
 int main(){
@@ -64,7 +126,7 @@ int main(){
         printf("#               MENU                  #\n");
         printf("#######################################\n");
         printf("#  1 - CADASTRAR Alunos               #\n");
-        printf("#  2 - CADASTRAR Profesor             #\n");
+        printf("#  2 - CADASTRAR Professor            #\n");
         printf("#  3 - CADASTRAR Curso                #\n");
         printf("#  4 - CADASTRAR Discipina            #\n");
         printf("#  5 - EXIBIR Alunos                  #\n");
@@ -86,22 +148,34 @@ int main(){
                 cadastrarAlunos(v_alunos, qtd_alunos);
 				break;
             case 2:
-                //qtd_professores = cadastrarProfessores(v_professores);
+                printf("Informe a qtd de professores: ");
+                scanf("%i",qtd_professores);
+                v_professores = (Professor *)malloc(qtd_professores * sizeof(Professor));
+                cadastrarProfessores(v_professores, qtd_professores);
                 break;
             case 3:
-                //qtd_cursos = cadastrarCursos(v_cursos);
+                printf("Informe a qtd de cursos: ");
+                scanf("%i",qtd_cursos);
+                v_cursos = (Curso *)malloc(qtd_cursos * sizeof(Curso));
+                cadastarCursos(v_cursos, qtd_cursos);
                 break;
             case 4:
-                //qtd_disciplinas = cadastrarDisciplinas(v_disciplinas);
+                printf("Informe a qtd de disciplinas: ");
+                scanf("%i",qtd_disciplinas);
+                v_disciplinas = (Disciplina *)malloc(qtd_disciplinas * sizeof(Disciplina));
+                cadastrarDisciplinas(v_disciplinas, qtd_disciplinas);
                 break;
             case 5:
                 exibirAlunos(v_alunos, qtd_alunos);
                 break;
             case 6:
+                exibirProfessores(v_professores, qtd_professores);
                 break;
             case 7:
+                exibirCursos(v_cursos, qtd_cursos);
                 break;
             case 8:
+                exibirDisciplinas(v_disciplinas, qtd_disciplinas);
                 break;
             case 9:
                 break;
