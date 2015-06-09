@@ -55,7 +55,7 @@ void cadastrarProfessores(Professor *v, int qtd){
 
     for(i=0;i<qtd;i++){
         printf("Informe o ID do professor: ");
-        scanf("%i",&v[i].id_aluno);
+        scanf("%i",&v[i].id_professor);
         getchar();
         printf("Informe o nome do professor: ");
         gets(v[i].nome);
@@ -133,6 +133,7 @@ int main(){
     Curso *v_cursos;
     int qtd_alunos, qtd_professores, qtd_disciplinas, qtd_cursos;
     int opc,i,j;
+    int id;
 
     while(1){
         system("cls");
@@ -171,7 +172,7 @@ int main(){
                 printf("Informe a qtd de cursos: ");
                 scanf("%i",&qtd_cursos);
                 v_cursos = (Curso *)malloc(qtd_cursos * sizeof(Curso));
-                cadastarCursos(v_cursos, qtd_cursos);
+                cadastrarCursos(v_cursos, qtd_cursos);
                 break;
             case 4:
                 printf("Informe a qtd de disciplinas: ");
@@ -192,7 +193,7 @@ int main(){
                 exibirDisciplinas(v_disciplinas, qtd_disciplinas);
                 break;
             case 9:
-                int id;
+
                 printf("Informe o ID do curso: ");
                 scanf("%i",&id);
                 //Identificar o curso a ser cadastrado as disciplinas
@@ -208,7 +209,6 @@ int main(){
                 system("pause");
                 break;
             case 10:
-                int id;
                 printf("Informe o ID do curso: ");
                 scanf("%i",&id);
                 for(i=0;i<qtd_cursos;i++){
