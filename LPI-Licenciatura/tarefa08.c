@@ -1,3 +1,20 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  tarefa08.c
+ *
+ *    Description:  Tarefa08 - Licenciatura em Informatica (CEAD)
+ *
+ *        Version:  1.0
+ *        Created:  29/04/2015 18:54:38
+ *       Revision:  none
+ *       Compiler:  clang/gcc
+ *
+ *         Author:  Rafael S. Guimaraes (rafaelg@ifes.edu.br),
+ *   Organization:  IFES - Campus Cachoeiro de Itapemirim
+ *
+ * =====================================================================================
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,7 +32,6 @@ typedef struct aluno {
 
 // Funcao para o cadastro de alunos em um arquivo
 void cadastrarAluno(){
-    int i;
     FILE *fp;
     Aluno aux;
 
@@ -37,7 +53,7 @@ void cadastrarAluno(){
     aux.media = (aux.nota_trabalho + aux.nota_prova)/2;
 
     // Abre o arquivo com a opcao "ab" para anexar uma nova informacao
-	fp = fopen("alunos.dat","ab");
+	fp = fopen("alunos.dat","a+b");
 	if(fwrite(&aux,sizeof(Aluno),1,fp)!=1)
 	   printf("Gravado no arquivo com sucesso...\n");
     fclose(fp);
@@ -170,7 +186,7 @@ void alterarAluno(int id){
         printf("\tInforme a nota da prova: ");
         scanf("%f",&aux.nota_prova);
 
-        //Posiciona para uma referencia anterior
+        //Posiciona o cursor para uma referencia anterior
         fseek(fp, - sizeof(Aluno), SEEK_CUR);
         fwrite(&aux, sizeof(Aluno), 1,fp);
         fclose(fp);
@@ -181,56 +197,56 @@ void alterarAluno(int id){
 }
 
 int main(){
-    int opc,i,identificador;
+    int opc,identificador;
     float media;
 
     while(1){
         // Menu de opcoes
         system("clear");
-        printf("###########################################\n");
-        printf("#                   MENU                  #\n");
-        printf("###########################################\n");
-        printf("#  1 - CADASTRAR ALUNO                    #\n");
-        printf("#  2 - ALTERAR DADOS DO ALUNO             #\n");
-        printf("#  3 - IMPRIMIR ALUNOS                    #\n");
-        printf("#  4 - IMPRIMIR ALUNOS APROVADOS          #\n");
-        printf("#  5 - IMPRIMIR ALUNOS (ORDEM ALFABETICA) #\n");
-        printf("#  0 - Sair                               #\n");
-        printf("###########################################\n");
-        printf("## Informe uma opcao: ");
+        printf("\t#############################################\n");
+        printf("\t#                     MENU                  #\n");
+        printf("\t#############################################\n");
+        printf("\t#  1 - CADASTRAR ALUNO                      #\n");
+        printf("\t#  2 - ALTERAR DADOS DO ALUNO               #\n");
+        printf("\t#  3 - IMPRIMIR ALUNOS                      #\n");
+        printf("\t#  4 - IMPRIMIR ALUNOS APROVADOS            #\n");
+        printf("\t#  5 - IMPRIMIR ALUNOS (ORDEM ALFABETICA)   #\n");
+        printf("\t#  0 - Sair                                 #\n");
+        printf("\t#############################################\n");
+        printf("\t## Informe uma opcao: ");
         scanf("%i",&opc);
 
         system("clear");
 
         switch(opc){
             case 1:
-                //Chama o procedimento para o cadastro do aluno
+                // Chama o procedimento para o cadastro do aluno
                 cadastrarAluno();
 				break;
             case 2:
+                // Altera o valor de algum aluno passando a sua matricula
                 printf("Digite a matricula do aluno a ser alterado: ");
                 scanf("%i", &identificador);
                 alterarAluno(identificador);
                 break;
             case 3:
+                // Imprime os dados de todos os alunos
                 imprimirAlunos();
                 break;
             case 4:
+                // Imprime os dados dos alunos pela referencia da media a ser definida
                 printf("Digite a media: ");
                 scanf("%f", &media);
                 imprimirAlunosAprovados(media);
                 break;
             case 5:
+                // Imprime os dados de todos os alunos ordenados pelo nome
                 imprimirAlunosOrdenados();
                 break;
             case 0:
+                // Finaliza a execucao do software
                 exit(0);
                 break;
         }
     }
 }
-
-
-
-
-
