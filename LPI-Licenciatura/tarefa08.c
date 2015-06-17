@@ -96,7 +96,7 @@ int main(){
 
                 break;
             case 5:
-                exibirAlunos(v_alunos, qtd_alunos);
+                imprimirAlunos(v_alunos, qtd_alunos);
                 break;
             case 0:
                 exit(0);
