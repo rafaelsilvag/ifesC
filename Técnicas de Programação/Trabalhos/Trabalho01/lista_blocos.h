@@ -15,8 +15,8 @@
  *
  * =====================================================================================
  */
-#ifndef __LISTA_BLOCOS_H__ 
-#define __LISTA_BLOCOS_H__ 
+#ifndef __LISTA_BLOCOS_H__
+#define __LISTA_BLOCOS_H__
 
 typedef struct no_lista {
 	int info;
@@ -28,10 +28,10 @@ typedef struct lista {
 	NoLista* prim;
 } Lista;
 
-Lista* Lista_inicializa ();	
+Lista* Lista_inicializa ();
 void Lista_insere (Lista *l, int v);
 int Lista_retira (Lista* l, int v);
 void Lista_imprime (Lista *l);
 int Lista_vazia (Lista *l);
 
-#endif 
+#endif
