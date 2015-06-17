@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Declaracao da estrutura Aluno
 typedef struct aluno {
     int matricula;
     char nome[30];
@@ -12,7 +13,8 @@ typedef struct aluno {
     float media;
 }Aluno;
 
-void cadastrarAlunos(){
+// Funcao para o cadastro de alunos em um arquivo
+void cadastrarAluno(){
     int i;
     FILE *fp;
     Aluno aux;
@@ -24,7 +26,7 @@ void cadastrarAlunos(){
     gets(aux.nome);
     printf("\tInforme a idade do aluno: ");
     scanf("%i",&aux.idade);
-    getchar()
+    getchar();
     printf("\tInforme a serie: ");
     gets(aux.serie);
     printf("\tInforme a nota do trabalho: ");
@@ -32,40 +34,95 @@ void cadastrarAlunos(){
     printf("\tInforme a nota da prova: ");
     scanf("%f",&aux.nota_prova);
 
-    aux.media = (nota_trabalho + nota_prova)/2;
+    aux.media = (aux.nota_trabalho + aux.nota_prova)/2;
 
-	fp = fopen("arquivoAluno.bin","ab");
+    // Abre o arquivo com a opcao "ab" para anexar uma nova informacao
+	fp = fopen("alunos.dat","ab");
 	if(fwrite(&aux,sizeof(Aluno),1,fp)!=1)
 	   printf("Gravado no arquivo com sucesso...\n");
     fclose(fp);
 }
 
-int imprimirAlunos(Aluno *v, int qtd){
+//Imprimir os dados dos alunos gravados no arquivo
+void imprimirAlunos(){
+    Aluno aux;
     FILE *fp;
-    Aluno alu;
-	int i;
-    fp = fopen("arquivoAluno.bin","rb");
-    if(fp == NULL){
-    	printf("Nao foi possivel abrir o arquivo.\n");
-        system("sleep 2");
-        return 0;
-	}
-   	fread(&alu,sizeof(Aluno),1,fp);
-    printf("\n\tMATRICULA: %i\n", alu.matricula);
-    printf("\tNOME: %s\n", alu.nome);
-    printf("\tIDADE: %i\n", alu.idade);
-    printf("\tSERIE: %s\n", alu.serie);
-    printf("\tNOTA TRABALHO: %.2f\n", alu.nota_trabalho);
-    printf("\tNOTA PROVA: %.2f\n", alu.nota_prova);
-    printf("\tMEDIA: %.2f\n", alu.media);
-    printf("\n");
-	fclose(fp);
-    system("sleep 2");
+
+    fp = fopen("alunos.dat","rb");
+
+    if(!fp){
+        printf("\nNao existe produto cadastrado. \n");
+    }else{
+
+        fread(&aux, sizeof(Aluno), 1,fp);
+        do{
+            printf("\n\tMATRICULA: %i\n", aux.matricula);
+            printf("\tNOME: %s\n", aux.nome);
+            printf("\tIDADE: %i\n", aux.idade);
+            printf("\tSERIE: %s\n", aux.serie);
+            printf("\tNOTA TRABALHO: %.2f\n", aux.nota_trabalho);
+            printf("\tNOTA PROVA: %.2f\n", aux.nota_prova);
+            printf("\tMEDIA: %.2f\n", aux.media);
+            fread(&aux, sizeof(Aluno), 1,fp);
+        }while(!feof(fp));
+
+        fclose(fp);
+        system("\n\npause");
+        system("clear");
+    }
+}
+
+//Funcao para alterar os dados do Aluno
+void alterarAluno(int id){
+    Aluno aux;
+    int verdade = 0;
+    FILE *fp;
+
+    fp = fopen("alunos.dat","r+b");
+
+    // Verificando a existencia do aluno.
+    while (feof(fp) == 0) {
+
+        fread(&aux, sizeof(Aluno), 1,fp);
+        //Se encontrou o aluno
+        if (aux.matricula == id){
+            verdade = 1;
+            break;
+        }
+    }
+    //Se verdade, modifica as informacoes do usuario
+    if (verdade == 1) {
+        // Alterando os dados do aluno.
+        printf("\n\tInforme a matricula do aluno: ");
+        scanf("%i",&aux.matricula);
+        getchar();
+        printf("\tInforme o nome do aluno: ");
+        gets(aux.nome);
+        printf("\tInforme a idade do aluno: ");
+        scanf("%i",&aux.idade);
+        getchar();
+        printf("\tInforme a serie: ");
+        gets(aux.serie);
+        printf("\tInforme a nota do trabalho: ");
+        scanf("%f",&aux.nota_trabalho);
+        printf("\tInforme a nota da prova: ");
+        scanf("%f",&aux.nota_prova);
+
+        //Posiciona para uma referencia anterior
+        fseek(fp, - sizeof(Aluno), SEEK_CUR);
+        fwrite(&aux, sizeof(Aluno), 1,fp);
+        fclose(fp);
+    }
+    else {
+        printf("\nO produto nao foi encontrado. \n");
+    }
 }
 
 int main(){
-    int opc,i;
+    int opc,i,identificador;
+
     while(1){
+        // Menu de opcoes
         system("clear");
         printf("###########################################\n");
         printf("#                   MENU                  #\n");
@@ -84,19 +141,20 @@ int main(){
 
         switch(opc){
             case 1:
+                //Chama o procedimento para o cadastro do aluno
                 cadastrarAluno();
 				break;
             case 2:
-
+                printf("Digite a matricula do aluno a ser alterado: ");
+                scanf("%i", &identificador);
+                alterarAluno(identificador);
                 break;
             case 3:
-
+                imprimirAlunos();
                 break;
             case 4:
-
                 break;
             case 5:
-                imprimirAlunos(v_alunos, qtd_alunos);
                 break;
             case 0:
                 exit(0);
