@@ -71,7 +71,69 @@ void imprimirAlunos(){
         system("clear");
     }
 }
+//Imprimir apenas os alunos aprovados.
+void imprimirAlunosAprovados(float media){
+    Aluno aux;
+    FILE *fp;
 
+    fp = fopen("alunos.dat","rb");
+
+    if(!fp){
+        printf("\nNao existe produto cadastrado. \n");
+
+    }else{
+
+        fread(&aux, sizeof(Aluno), 1, fp);
+
+        do {
+
+            if (aux.media >= media) {
+                printf("\n\tMATRICULA: %i\n", aux.matricula);
+                printf("\tNOME: %s\n", aux.nome);
+                printf("\tIDADE: %i\n", aux.idade);
+                printf("\tSERIE: %s\n", aux.serie);
+                printf("\tNOTA TRABALHO: %.2f\n", aux.nota_trabalho);
+                printf("\tNOTA PROVA: %.2f\n", aux.nota_prova);
+                printf("\tMEDIA: %.2f\n", aux.media);
+            }
+            fread(&aux, sizeof(Aluno), 1, fp);
+        }while (!feof(fp));
+
+        fclose(fp);
+        system("\n\npause");
+        system("cls");
+    }
+
+}
+
+void imprimirAlunosOrdenados(){
+    Aluno aux;
+    FILE *fp;
+
+    fp = fopen("alunos.dat","rb");
+
+    if(!fp){
+        printf("\nNao existe produto cadastrado. \n");
+    }else{
+
+        fread(&aux, sizeof(Aluno), 1, fp);
+
+        do {
+            printf("\n\tMATRICULA: %i\n", aux.matricula);
+            printf("\tNOME: %s\n", aux.nome);
+            printf("\tIDADE: %i\n", aux.idade);
+            printf("\tSERIE: %s\n", aux.serie);
+            printf("\tNOTA TRABALHO: %.2f\n", aux.nota_trabalho);
+            printf("\tNOTA PROVA: %.2f\n", aux.nota_prova);
+            printf("\tMEDIA: %.2f\n", aux.media);
+            fread(&aux, sizeof(Aluno), 1, fp);
+        }while (!feof(fp));
+
+        fclose(fp);
+        system("\n\npause");
+        system("cls");
+    }
+}
 //Funcao para alterar os dados do Aluno
 void alterarAluno(int id){
     Aluno aux;
@@ -120,6 +182,7 @@ void alterarAluno(int id){
 
 int main(){
     int opc,i,identificador;
+    float media;
 
     while(1){
         // Menu de opcoes
@@ -153,8 +216,12 @@ int main(){
                 imprimirAlunos();
                 break;
             case 4:
+                printf("Digite a media: ");
+                scanf("%f", &media);
+                imprimirAlunosAprovados(media);
                 break;
             case 5:
+                imprimirAlunosOrdenados();
                 break;
             case 0:
                 exit(0);
