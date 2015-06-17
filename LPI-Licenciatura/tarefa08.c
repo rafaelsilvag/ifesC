@@ -57,6 +57,8 @@ void cadastrarAluno(){
 	if(fwrite(&aux,sizeof(Aluno),1,fp)!=1)
 	   printf("Gravado no arquivo com sucesso...\n");
     fclose(fp);
+    system("\n\npause");
+    system("clear");
 }
 
 //Imprimir os dados dos alunos gravados no arquivo
@@ -65,11 +67,13 @@ void imprimirAlunos(){
     FILE *fp;
 
     fp = fopen("alunos.dat","rb");
-
+    // Verifica se foi possivel abrir o arquivo para "ler um binario == rb"
     if(!fp){
         printf("\nNao existe produto cadastrado. \n");
+        system("\n\npause");
+        system("clear");
     }else{
-
+        // Ler o dado em uma determinada posicao do arquivo
         fread(&aux, sizeof(Aluno), 1,fp);
         do{
             printf("\n\tMATRICULA: %i\n", aux.matricula);
@@ -93,12 +97,13 @@ void imprimirAlunosAprovados(float media){
     FILE *fp;
 
     fp = fopen("alunos.dat","rb");
-
+    // Verifica se foi possivel abrir o arquivo para "ler um binario == rb"
     if(!fp){
         printf("\nNao existe produto cadastrado. \n");
-
+        system("\n\npause");
+        system("clear");
     }else{
-
+        // Ler o dado em uma determinada posicao do arquivo
         fread(&aux, sizeof(Aluno), 1, fp);
 
         do {
@@ -113,7 +118,7 @@ void imprimirAlunosAprovados(float media){
                 printf("\tMEDIA: %.2f\n", aux.media);
             }
             fread(&aux, sizeof(Aluno), 1, fp);
-        }while (!feof(fp));
+        }while (!feof(fp)); // Enquanto nao for o final do arquivo
 
         fclose(fp);
         system("\n\npause");
@@ -128,10 +133,13 @@ void imprimirAlunosOrdenados(){
 
     fp = fopen("alunos.dat","rb");
 
+    // Verifica se foi possivel abrir o arquivo para "ler um binario == rb"
     if(!fp){
         printf("\nNao existe produto cadastrado. \n");
+        system("\n\npause");
+        system("clear");
     }else{
-
+        // Ler o dado em uma determinada posicao do arquivo
         fread(&aux, sizeof(Aluno), 1, fp);
 
         do {
@@ -143,7 +151,7 @@ void imprimirAlunosOrdenados(){
             printf("\tNOTA PROVA: %.2f\n", aux.nota_prova);
             printf("\tMEDIA: %.2f\n", aux.media);
             fread(&aux, sizeof(Aluno), 1, fp);
-        }while (!feof(fp));
+        }while (!feof(fp)); // Enquanto nao for o final do arquivo
 
         fclose(fp);
         system("\n\npause");
@@ -159,8 +167,8 @@ void alterarAluno(int id){
     fp = fopen("alunos.dat","r+b");
 
     // Verificando a existencia do aluno.
-    while (feof(fp) == 0) {
-
+    while (!feof(fp)) { // Enquanto nao for o final do arquivo
+        // Ler o dado em uma determinada posicao do arquivo
         fread(&aux, sizeof(Aluno), 1,fp);
         //Se encontrou o aluno
         if (aux.matricula == id){
@@ -193,6 +201,8 @@ void alterarAluno(int id){
     }
     else {
         printf("\nO produto nao foi encontrado. \n");
+        system("\n\npause");
+        system("clear");
     }
 }
 
