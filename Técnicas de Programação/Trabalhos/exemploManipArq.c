@@ -3,7 +3,7 @@
  *
  *       Filename:  exemploManipArq.c
  *
- *    Description:  Tarefa08 - Licenciatura em Informatica (CEAD)
+ *    Description:  Exemplo de Manipulacao de Arquivos
  *
  *        Version:  1.0
  *        Created:  29/04/2015 18:54:38
