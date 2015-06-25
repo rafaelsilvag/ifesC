@@ -7,7 +7,7 @@ Valor: 7,5 pontos
 #define maxTam 10
 
 int main(){
-	int Matriz[maxTam][maxTam]; // 1,0 Ponto
+	int Matriz[maxTam][maxTam]; // 1,5 Ponto
 	int i, j;
 
 	//Lendo os elementos da Matriz Matriz
