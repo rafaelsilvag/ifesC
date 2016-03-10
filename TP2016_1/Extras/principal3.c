@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#define INSS 0.18
+#define IR 0.04
 
 void cadastrarSalario(float *x){
     float sal;
@@ -8,15 +11,16 @@ void cadastrarSalario(float *x){
 
     *x = sal;
 }
+
 void visualizarSalBruto(float sal){
     system("cls");
     printf("\t\t\tSalario Bruto: %.2f\n",sal);
 }
 float valorInss(float sal){
-    return (sal * 0.15);
+    return (sal * INSS);
 }
 float valorIr(float sal){
-    return (sal * 0.04);
+    return (sal * IR);
 }
 void calcularSalLiquido(float sal, float *salLiquido){
     *salLiquido = valorInss(sal)+valorIr(sal);
@@ -26,6 +30,7 @@ void visualizarSalLiquido(float salLiquido){
     system("cls");
     printf("\t\t\tSalario Liquido: %.2f\n", salLiquido);
 }
+
 
 int main(){
     int opcMenu;
@@ -37,8 +42,8 @@ int main(){
         printf("\t\t\t# 1 - Cad. Salario      \n");
         printf("\t\t\t# 2 - Vis. Salario Bruto\n");
         printf("\t\t\t# 3 - Vis. Salario Liq. \n");
-        printf("\t\t\t# 4 - Valor do INSS     \n");
-        printf("\t\t\t# 5 - Valor do IR       \n");
+        printf("\t\t\t# 4 - Vis. Valor INSS.  \n");
+        printf("\t\t\t# 5 - Vis. Valor IR.    \n");
         printf("\t\t\t# 0 - Sair              \n");
         printf("\t\t\t########################\n");
         printf("\t\t\tInforme uma opcao: ");
@@ -57,11 +62,11 @@ int main(){
                 break;
             case 4:
                 system("cls");
-                printf("\t\t\tValor de INSS: %.2f\n", valorInss(salario));
+                printf("Valor INSS: %.2f\n",valorInss(salario));
                 break;
             case 5:
                 system("cls");
-                printf("\t\t\tValor de IR: %.2f\n", valorIr(salario));
+                printf("Valor IR: %.2f\n",valorIr(salario));
                 break;
             case 0:
                 system("cls");
