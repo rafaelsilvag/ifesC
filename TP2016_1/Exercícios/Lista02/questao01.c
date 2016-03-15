@@ -9,13 +9,54 @@
 #include <stdlib.h>
 
 void opcao1(float g){
-
+    float desconto;
+    // calculo o valor de desconto
+    desconto = (g * 0.1);
+    // Imprimir o valor do preco final
+    system("cls");
+    printf("#############################\n");
+    printf("Preco final: %.2f",(g - desconto));
+    printf("#############################\n");
+    system("pause");
 }
 void opcao2(float g){
-
+    int i;
+    float valorPrestacao;
+    valorPrestacao = g/2;
+    // Imprimir o valor de cada prestacao
+    system("cls");
+    printf("#############################\n");
+    for(i=1;i<=2;i++){
+        printf("Valor da prestacao %i eh: %.2f",i,valorPrestacao);
+    }
+    printf("#############################\n");
+    system("pause");
 }
 void opcao3(float g){
+    int i;
+    float num, valorPrestacoes, juros;
 
+    system("cls");
+    if(g > 100){
+        printf("Informe o numero de prestacoes: ");
+        scanf("%f",&num);
+
+        if(num >= 3 && num <= 10){
+            juros = g * 0.03 * num;
+            valorPrestacoes = (g + juros)/num;
+            system("cls");
+            printf("#############################\n");
+            for(i=1;i<=num;i++){
+                printf("Valor da prestacao %i eh: %.2f",i,valorPrestacoes);
+            }
+            printf("#############################\n");
+        }else{
+            printf("Numero de prestacoes nao e permitido!\n");
+        }
+    }else{
+        printf("Valor da compra deve ser maior que 100!\n")
+    }
+    system("pause");
 }
 int escolhaOpcoes(){
     int opc;
