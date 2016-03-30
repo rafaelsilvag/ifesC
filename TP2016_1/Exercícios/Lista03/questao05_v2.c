@@ -20,14 +20,13 @@ void inicializarMatriz(char m[TAM][TAM]){
 		}
 	}
 }
-
 void gerarBombas(char m[TAM][TAM]){
-    int qtdBombas=25;
+    int qtdBombas = 20;
     int i=0,x,y;
 
-    srand((unsigned)time(NULL));
+    srand((unsigned) time(NULL));
 
-    while(i<qtdBombas){
+    while(i < qtdBombas){
         x = rand() % TAM;
         y = rand() % TAM;
         m[x][y] = 'B';
@@ -35,21 +34,19 @@ void gerarBombas(char m[TAM][TAM]){
     }
 }
 void imprimirMatriz(char m[TAM][TAM]){
-	int i,j;
-
-	for(i=0;i<TAM;i++){
-		for(j=0;j<TAM;j++){
-			printf("%c ", m[i][j]);
-		}
-		printf("\n");
-	}
+    int i,j;
+    for(i=0;i<TAM;i++){
+        for(j=0;j<TAM;j++){
+            printf("%c ",m[i][j]);
+        }
+        printf("\n");
+    }
 }
 void imprimirJogo(char m[TAM][TAM]){
     int i,j;
-
     for(i=0;i<TAM;i++){
         for(j=0;j<TAM;j++){
-            if(m[i][j] == 'B' || m[i][j] == 'L'){
+            if(m[i][j]=='B' || m[i][j] == 'L'){
                 printf("# ");
             }else{
                 printf("@ ");
@@ -77,37 +74,35 @@ void realizarJogada(char m[TAM][TAM], char jogador, int *vez){
     printf("Informe o valor de Y: ");
     scanf("%i", &y);
 
-    // Verifica se o local nos valores X e Y
-    // esta disponivel para jogada.
     if(m[x][y] == 'L'){
         m[x][y] = jogador;
         *vez = *vez + 1;
     }else if(m[x][y] == 'B'){
         system("clear");
-        printf("Jogador %c Perdeu!!\n",jogador);
+        printf("O jogador %c PERDEU!!\n",jogador);
         imprimirMatriz(m);
-        system("pause");
+        system("sleep 2");
         *vez = 1;
         inicializarMatriz(m);
         gerarBombas(m);
     }else{
         system("clear");
-        printf("Nao eh possivel realizar a jogada!\n");
-        system("pause");
+        printf("Local nao eh valido!!\n");
+        printf("Efetue uma nova jogada!\n");
+        system("sleep 2");
     }
 }
 int main(){
     char campoMinado[TAM][TAM];
-
     int opc, vez=1;
-    // Chama a funcao para inicializar a matriz do campo minado
+    // Chama a funcao para inicializar a matriz do campo Minado
     inicializarMatriz(campoMinado);
     gerarBombas(campoMinado);
 
     do{
         system("clear");
-        // Imprime o esta atual do Campo minado
-        // e, em seguida, mostra o menu novamente
+        // Imprime o esta atual do jogo da velha e
+        // em seguida, mostra o menu novamente
         imprimirJogo(campoMinado);
         opc = menu();
         switch(opc){
