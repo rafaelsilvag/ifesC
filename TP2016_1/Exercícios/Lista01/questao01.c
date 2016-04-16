@@ -10,7 +10,7 @@
 
 void categoria(int idade){
 
-    printf("\t\t\tCategoria: ");
+    printf("############# Categoria: ##############\n");
     if(idade >= 5 && idade <= 7){
         printf("Infantil A\n")
     }else if(idade >= 8 && idade <= 10){
@@ -24,11 +24,13 @@ void categoria(int idade){
     }else{
         printf("Sem categoria!\n");
     }
+    printf("#######################################\n");
 }
 
 int main(){
     // declaracao das variaveis
     int idade;
+    system("cls");
     // Cadastra a idade do atleta
     printf("Informe a idade: ");
     scanf("%d",&idade);
