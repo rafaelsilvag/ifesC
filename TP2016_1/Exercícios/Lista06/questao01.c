@@ -11,7 +11,7 @@ typedef struct cliente {
 
 int main(){
     Cliente cli;
-    int opc;
+    int opc, id;
 
     FILE *arq;
 
@@ -48,7 +48,7 @@ int main(){
                     break;
             case 2:
                     arq = fopen("clientes.bin", "r+b");
-                    int pos=0, id;
+                    int pos=0;
                     Cliente aux2;
                     printf("Informe o ID do cliente: ");
                     scanf("%i",&id);
@@ -87,31 +87,94 @@ int main(){
                     fclose(arq);
                     break;
             case 3:
-                    break;
-            case 4:
-                    arq = fopen("clientes.bin", "rb");
-                    // Posiciona o cursor para o inicio do arquivo;
+                    arq = fopen("clientes.bin", "r+b");
+                    int pos=0;
+                    Cliente aux3;
+                    printf("Informe o ID do cliente: ");
+                    scanf("%i",&id);
                     rewind(arq);
-                    // Cria uma variavel auxiliar para imprimir
-                    // os dados dos clientes;
-                    Cliente aux;
-                    // Efetua a leitura ate encontrar o final do arquivo;
-                    system("clear");
                     while(!feof(arq)){
-                        if(fread(&aux, sizeof(Cliente),1,arq) != 1){
+                        if(fread(&aux2, sizeof(Cliente),1,arq) != 1){
                             printf("Falha ao ler informacoes do cliente!\n");
                         }else{
-                            printf("#####################################\n");
-                            printf("# ID: %i\n", aux.idCliente);
-                            printf("# Nome: %s\n", aux.nome);
-                            printf("# Idade: %i\n", aux.idade);
-                            printf("# Ativo: %i\n", aux.ativo);
+                            if(id == aux2.idCliente){
+                                break;
+                            }
                         }
+                        pos++;
                     }
-                    printf("#####################################\n");
-                    system("sleep 2");
+                    system("cls");
+                    printf("Alterando a Posicao: %i\n",pos);
+                    printf("##### Dados atuais #####\n");
+                    printf("# ID: %i\n", aux2.idCliente);
+                    printf("# Nome: %s\n", aux2.nome);
+                    printf("#########################\n");
+                    // Alterando o status do cliente
+                    aux2.ativo = 0;
+                    // Posiciona o cursor na posicao que sera reescrita;
+                    fseek(arq, sizeof(Cliente)*(pos), SEEK_SET);
+                    // Escreve o novo valor;
+                    fwrite(&aux2, sizeof(Cliente),1,arq);
+                    printf("Cliente desativado com sucesso!\n");
+                    system("pause");
                     fclose(arq);
                     break;
+            case 4:
+                arq = fopen("clientes.bin", "rb");
+                int opc_sub;
+                // Posiciona o cursor para o inicio do arquivo;
+                rewind(arq);
+                // Cria uma variavel auxiliar para imprimir
+                // os dados dos clientes;
+                Cliente aux;
+                // Efetua a leitura ate encontrar o final do arquivo;
+                system("clear");
+
+                do{
+                    system("cls");
+                    printf("####### INFORME UM VALOR #######\n");
+                    printf("# 1 - Listar Usuarios Ativos    \n");
+                    printf("# 2 - Listar Usuarios Inativos  \n");
+                    printf("# 0 - Voltar                    \n");
+                    printf("################################\n");
+                    scanf("%i",&opc_sub);
+                    switch(opc_sub){
+                        case 1:
+                            do{
+                                if(fread(&aux, sizeof(Cliente),1,arq) != 1){
+                                    printf("Falha ao ler informacoes do cliente!\n");
+                                }else{
+                                    if(aux.ativo == 1){
+                                        printf("#####################################\n");
+                                        printf("# ID: %i\n", aux.idCliente);
+                                        printf("# Nome: %s\n", aux.nome);
+                                        printf("# Idade: %i\n", aux.idade);
+                                        printf("# Ativo: %i\n", aux.ativo);
+                                    }
+                                }
+                            }while(!feof(arq));
+                            break;
+                        case 2:
+                            do{
+                                if(fread(&aux, sizeof(Cliente),1,arq) != 1){
+                                    printf("Falha ao ler informacoes do cliente!\n");
+                                }else{
+                                    if(aux.ativo == 0){
+                                        printf("#####################################\n");
+                                        printf("# ID: %i\n", aux.idCliente);
+                                        printf("# Nome: %s\n", aux.nome);
+                                        printf("# Idade: %i\n", aux.idade);
+                                        printf("# Ativo: %i\n", aux.ativo);
+                                    }
+                                }
+                            }while(!feof(arq));
+                            break;
+                    }
+                    printf("#####################################\n");
+                    system("pause");
+                }while(opc_sub != 0);
+                fclose(arq);
+                break;
             case 0:
                     fclose(arq);
                     break;
