@@ -1,4 +1,5 @@
-FILE = principal
+FILE = trabalho
+
 
 all :
 	gcc -c fila*.c
